@@ -36,15 +36,23 @@ A comprehensive Playwright test automation framework with advanced CAPTCHA preve
 ### Run Tests
 
 ```bash
-# Run all tests with CAPTCHA prevention
+# Run all tests with CAPTCHA prevention (headed mode)
 npm test
 
 # Run with specific browser
 npm run test:firefox
 
-# Run with enhanced stealth mode
+# Run with enhanced stealth mode (RECOMMENDED - headed mode)
 npm run test:stealth
+
+# Run headless (higher CAPTCHA risk)
+npm run test:headless
+
+# Compare: stealth headless vs headed (for testing)
+npm run test:stealth-headless
 ```
+
+> **⚠️ IMPORTANT**: Stealth mode works best in **headed mode** (`headless: false`). Headless browsers are more easily detected by CAPTCHA systems.
 
 ### Example Test Usage
 

@@ -7,6 +7,8 @@
     "test": "npx playwright test --project=chromium --headed",
     "test:firefox": "npx playwright test --project=firefox --headed",
     "test:stealth": "npx playwright test --project=chromium-stealth --headed",
+    "test:headless": "npx playwright test --project=chromium",
+    "test:stealth-headless": "npx playwright test --project=chromium-stealth --headed=false",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "prettier --check ."
