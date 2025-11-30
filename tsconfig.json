@@ -20,14 +20,6 @@
       "*": ["node_modules/*", "types/*"]
     }
   },
-  "include": [
-    "tests/**/*",
-    "*.ts",
-    "*.js"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "test-results"
-  ]
+  "include": ["tests/**/*", "*.ts", "*.js"],
+  "exclude": ["node_modules", "dist", "test-results"]
 }

@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test'
 
 /**
  * Playwright configuration with CAPTCHA prevention
@@ -29,7 +29,8 @@ export default defineConfig({
     video: 'retain-on-failure',
 
     // Browser settings to avoid detection
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     viewport: { width: 1366, height: 768 },
     locale: 'en-US',
     timezoneId: 'America/New_York',
@@ -38,7 +39,7 @@ export default defineConfig({
     extraHTTPHeaders: {
       'Accept-Language': 'en-US,en;q=0.9',
       'Accept-Encoding': 'gzip, deflate, br',
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Cache-Control': 'no-cache'
     }
   },
@@ -46,11 +47,11 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'] }
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: { ...devices['Desktop Firefox'] }
     },
     {
       name: 'chromium-stealth',
@@ -86,7 +87,7 @@ export default defineConfig({
             '--exclude-switches=enable-automation'
           ]
         }
-      },
-    },
-  ],
-});
+      }
+    }
+  ]
+})
