@@ -47,7 +47,7 @@ This guide covers proven strategies to **avoid triggering CAPTCHAs** in the firs
 ### Method 1: Use Enhanced Test (Recommended)
 Your test is already configured! Just run:
 ```bash
-npx playwright test
+npm run test
 ```
 
 The test now includes:
@@ -59,7 +59,7 @@ The test now includes:
 ### Method 2: Use Stealth Configuration
 For maximum stealth, use the enhanced config:
 ```bash
-npx playwright test --config playwright.config.stealth.ts
+npm run test:stealth
 ```
 
 ## 📊 Effectiveness Metrics
