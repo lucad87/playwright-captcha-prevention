@@ -6,7 +6,10 @@
   "scripts": {
     "test": "npx playwright test --project=chromium --headed",
     "test:firefox": "npx playwright test --project=firefox --headed",
-    "test:stealth": "npx playwright test --project=chromium-stealth --headed"
+    "test:stealth": "npx playwright test --project=chromium-stealth --headed",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "prettier --check ."
   },
   "keywords": [],
   "author": "",
@@ -14,7 +17,8 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.10.1",
+    "prettier": "^3.7.3"
   },
   "optionalDependencies": {
     "playwright-extra": "^4.3.6",

@@ -13,7 +13,7 @@ A comprehensive Playwright test automation framework with advanced CAPTCHA preve
 
 ## 📋 Prerequisites
 
-- Node.js 16+ 
+- Node.js 16+
 - npm or yarn
 
 ## 🔧 Installation
@@ -21,6 +21,7 @@ A comprehensive Playwright test automation framework with advanced CAPTCHA preve
 1. **Clone the repository**
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
@@ -33,6 +34,7 @@ A comprehensive Playwright test automation framework with advanced CAPTCHA preve
 ## 🎮 Quick Start
 
 ### Run Tests
+
 ```bash
 # Run all tests with CAPTCHA prevention
 npm test
@@ -45,32 +47,34 @@ npm run test:stealth
 ```
 
 ### Example Test Usage
-```typescript
-import { test, expect } from './fixtures/page-fixtures';
 
-test('Google search with CAPTCHA prevention', async ({ 
-  googleHome, 
-  searchResults, 
-  captchaHandler, 
-  captchaPrevention 
+```typescript
+import { test, expect } from './fixtures/page-fixtures'
+
+test('Google search with CAPTCHA prevention', async ({
+  googleHome,
+  searchResults,
+  captchaHandler,
+  captchaPrevention
 }) => {
   // Navigate with human-like behavior
-  await googleHome.navigate();
-  await googleHome.search('Playwright automation', captchaPrevention);
-  
+  await googleHome.navigate()
+  await googleHome.search('Playwright automation', captchaPrevention)
+
   // Handle CAPTCHA if detected (bypass via homepage redirect)
   if (await captchaHandler.isCaptchaPresent()) {
-    await captchaHandler.attemptSolve(); // Attempts bypass, not actual solving
+    await captchaHandler.attemptSolve() // Attempts bypass, not actual solving
   }
-  
+
   // Verify results
-  await searchResults.verifyResultsPresent();
-});
+  await searchResults.verifyResultsPresent()
+})
 ```
 
 ## 🏗️ Architecture
 
 ### Page Object Model
+
 ```
 pages/
 ├── google-page.ts          # Google-specific page objects
@@ -82,6 +86,7 @@ fixtures/
 ```
 
 ### CAPTCHA Prevention System
+
 ```
 captcha-prevention.js       # Human behavior simulation
 captcha.config.js          # Prevention configuration
@@ -89,6 +94,7 @@ pages/google-page.ts        # CaptchaHandler class (detection & bypass)
 ```
 
 ### Test Structure
+
 ```
 tests/
 ├── google.spec.ts          # Google search tests
@@ -97,31 +103,34 @@ tests/
 
 ## 🛡️ CAPTCHA Prevention Strategies
 
-| Strategy | Effectiveness | Implementation |
-|----------|---------------|----------------|
-| Browser Stealth Flags | 60-70% | ✅ Active |
-| Human-like Delays | 40-50% | ✅ Active |
-| Session Warm-up | 30-40% | ✅ Active |
-| Mouse Movement Simulation | 20-30% | ✅ Active |
-| Request Rate Limiting | 50-60% | ✅ Active |
-| **Combined Approach** | **80-90%** | ✅ **Active** |
+| Strategy                  | Effectiveness | Implementation |
+| ------------------------- | ------------- | -------------- |
+| Browser Stealth Flags     | 60-70%        | ✅ Active      |
+| Human-like Delays         | 40-50%        | ✅ Active      |
+| Session Warm-up           | 30-40%        | ✅ Active      |
+| Mouse Movement Simulation | 20-30%        | ✅ Active      |
+| Request Rate Limiting     | 50-60%        | ✅ Active      |
+| **Combined Approach**     | **80-90%**    | ✅ **Active**  |
 
 ## 🎯 Available Fixtures
 
 ### Core Fixtures
+
 - `googleHome` - GoogleHomePage instance
-- `searchResults` - GoogleSearchResultsPage instance  
+- `searchResults` - GoogleSearchResultsPage instance
 - `captchaHandler` - CAPTCHA detection and bypass handler
 - `captchaPrevention` - Configured prevention utilities
 - `setupPage` - Page with CAPTCHA prevention applied
 
 ### Advanced Fixtures
+
 - `setupCaptchaPreventionSession` - Enhanced session setup
 - `withHumanBehavior` - Human behavior simulation
 
 ## ⚙️ Configuration
 
 ### Browser Settings
+
 The framework uses enhanced browser configurations in `playwright.config.ts`:
 
 ```typescript
@@ -137,6 +146,7 @@ use: {
 ```
 
 ### CAPTCHA Prevention
+
 Configure prevention strategies in `captcha.config.js`:
 
 ```javascript
@@ -152,7 +162,7 @@ module.exports = {
       scrolls: 2
     }
   }
-};
+}
 ```
 
 ## 📊 Prevention Effectiveness
@@ -169,16 +179,19 @@ The framework includes comprehensive CAPTCHA prevention metrics:
 ### Common Issues
 
 **CAPTCHA Still Appearing?**
+
 - Increase delays in `captcha.config.js`
 - Enable additional human behaviors
 - Check browser stealth settings
 
 **Tests Failing?**
+
 - Verify Playwright browsers are installed
 - Check network connectivity
 - Review test timeout settings
 
 **SSH Authentication Issues?**
+
 - Ensure SSH key is added to GitHub
 - Verify SSH agent is running: `ssh-add -l`
 - Test connection: `ssh -T git@github.com`
@@ -211,7 +224,7 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 ## 📈 Project Status
 
 - ✅ Core CAPTCHA prevention system
-- ✅ Page Object Model implementation  
+- ✅ Page Object Model implementation
 - ✅ Fixture-based test architecture
 - ✅ Comprehensive documentation
 - ✅ CAPTCHA bypass strategies (homepage redirect, refresh)
