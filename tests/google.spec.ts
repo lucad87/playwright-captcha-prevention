@@ -12,7 +12,10 @@ test.describe('Google Search', () => {
     }
     
     await googleHome.acceptConsentIfPresent();
-    await googleHome.verifySearchBoxVisible();
+    
+    // Verify search box is visible
+    const searchBox = googleHome.getSearchBox();
+    await expect(searchBox).toBeVisible();
   });
 
   test('returns results for Playwright query', async ({ 
@@ -76,8 +79,20 @@ test.describe('Google Search', () => {
 
     await googleHome.acceptConsentIfPresent();
     
-    // Verify results
-    await searchResults.verifyResultsPresent();
-    await searchResults.verifyPageTitle(/Playwright/i);
+    // Verify we're on search results page
+    await expect(searchResults.getPage()).toHaveURL(/search/);
+    
+    // Verify search results container is visible
+    const resultsContainer = await searchResults.getSearchResultsContainer();
+    await expect(resultsContainer).toBeVisible({ timeout: 10000 });
+    
+    // Verify first search result is visible
+    const firstResult = await searchResults.getFirstResult();
+    if (firstResult) {
+      await expect(firstResult).toBeVisible();
+    }
+    
+    // Verify page title contains search term
+    await expect(searchResults.getPage()).toHaveTitle(/Playwright/i);
   });
 });

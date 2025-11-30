@@ -1,5 +1,5 @@
 // pages/google-page.ts
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 
 export class GoogleHomePage {
   readonly page: Page;
@@ -51,8 +51,8 @@ export class GoogleHomePage {
     await this.page.waitForLoadState('domcontentloaded');
   }
 
-  async verifySearchBoxVisible(): Promise<void> {
-    await expect(this.searchBox).toBeVisible();
+  getSearchBox(): Locator {
+    return this.searchBox;
   }
 }
 
@@ -67,45 +67,32 @@ export class GoogleSearchResultsPage {
     this.resultSelectors = ['a h3', '#search a h3', '.g a h3', '[data-async-context] a h3'];
   }
 
-  async verifyResultsPresent(): Promise<void> {
-    // Verify we're on a search results page
-    await expect(this.page).toHaveURL(/search/);
-
+  async getSearchResultsContainer(): Promise<Locator> {
     // Find search results container
-    let searchResultsContainer: Locator | null = null;
-    
     for (const selector of this.searchSelectors) {
       const element = this.page.locator(selector);
       if (await element.isVisible({ timeout: 5000 }).catch(() => false)) {
-        searchResultsContainer = element;
-        break;
+        return element;
       }
     }
 
-    if (!searchResultsContainer) {
-      searchResultsContainer = this.page.locator('div[data-async-context], .g, #rso, #search').first();
-    }
+    // Fallback to generic selector
+    return this.page.locator('div[data-async-context], .g, #rso, #search').first();
+  }
 
-    await expect(searchResultsContainer).toBeVisible({ timeout: 10000 });
-
-    // Verify individual results
-    let results: Locator | null = null;
-    
+  async getFirstResult(): Promise<Locator | null> {
+    // Find first search result
     for (const selector of this.resultSelectors) {
       const elements = this.page.locator(selector);
       if (await elements.first().isVisible({ timeout: 5000 }).catch(() => false)) {
-        results = elements;
-        break;
+        return elements.first();
       }
     }
-
-    if (results) {
-      await expect(results.first()).toBeVisible();
-    }
+    return null;
   }
 
-  async verifyPageTitle(searchTerm: RegExp): Promise<void> {
-    await expect(this.page).toHaveTitle(searchTerm);
+  getPage(): Page {
+    return this.page;
   }
 }
 
